@@ -9,7 +9,9 @@
 ![Manifest V3](https://img.shields.io/badge/Manifest-V3-ff2d55?style=flat-square)
 ![Chrome](https://img.shields.io/badge/Chrome%20%7C%20Edge%20%7C%20Brave%20%7C%20Opera-supported-ff5078?style=flat-square)
 ![License](https://img.shields.io/badge/license-MIT-bf5af2?style=flat-square)
-![Version](https://img.shields.io/badge/version-1.1.0-30d158?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.1.1-30d158?style=flat-square)
+
+[![Support on Boosty](https://img.shields.io/badge/Support%20on-Boosty-f15f2c?style=for-the-badge&logo=boosty&logoColor=white)](https://boosty.to/mooooo111/donate)
 
 <img src="docs/popup-track.png" width="300" alt="Popup"> &nbsp; <img src="docs/popup-empty.png" width="300" alt="Popup empty state">
 
@@ -59,7 +61,11 @@ Everything happens on your machine — nothing is uploaded anywhere.
 
 ## 💖 Support
 
-If this extension saves you time, you can support development — see the **Sponsor** button at the top of this page. Starring the repo ⭐ helps a lot too!
+If this extension saves you time, you can support development:
+
+**[☕ Support on Boosty](https://boosty.to/mooooo111/donate)**
+
+Starring the repo ⭐ helps a lot too!
 
 ## ⚠️ Disclaimer
 

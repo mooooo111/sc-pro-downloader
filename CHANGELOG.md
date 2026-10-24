@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+- "Support the project" button in the popup now links to Boosty.
+- Link to the GitHub repository in the popup.
+
 ## 1.1.0
 - **Fixed:** cover art and tags were missing on tracks served as AAC (SoundCloud now serves most tracks this way). HLS AAC is now remuxed into a regular M4A with iTunes tags and embedded cover.
 - **Fixed:** MP3 comment frame was unreadable in some players.
