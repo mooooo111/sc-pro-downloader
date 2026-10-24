@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Downloader for SoundCloud</title>
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="liquid.css">
+</head>
+<body>
+    <div class="mesh-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Top Navigation -->
+        <header class="header glass-panel">
+            <div class="brand">
+                <div class="brand-badge">
+                    <img src="icons/icon-32.png" alt="Logo" width="22" height="22">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-title">Pro Downloader</span>
+                    <span class="brand-subtitle">for SoundCloud</span>
+                </div>
+            </div>
+            <div class="status-indicator" title="Ready to download">
+                <span class="status-dot"></span>
+                <span class="status-label">HD Ready</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Active / Playing Track Card -->
+            <section class="track-card glass-panel" id="trackCard" style="display: none;">
+                <div class="track-header">
+                    <div class="artwork-wrapper">
+                        <img id="trackArtwork" class="artwork-img" src="icons/icon-128.png" alt="Album Art">
+                        <div class="artwork-glare"></div>
+                    </div>
+                    <div class="track-details">
+                        <h2 class="track-title" id="trackTitle" title="Title">Loading track…</h2>
+                        <p class="track-artist" id="trackArtist">Artist</p>
+                        <div class="track-tags">
+                            <span class="badge badge-duration" id="trackDuration">0:00</span>
+                            <span class="badge badge-genre" id="trackGenre" style="display: none;">Genre</span>
+                            <span class="badge badge-hd">HD Cover</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-info">
+                        <span class="progress-status" id="progressStatus">Preparing…</span>
+                        <span class="progress-pct" id="progressPct">0%</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn btn-primary" id="downloadAudioBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        <span>Download with cover</span>
+                    </button>
+                    <button class="btn btn-secondary" id="downloadArtBtn" title="Download artwork in original quality">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <circle cx="8.5" cy="8.5" r="1.5"/>
+                            <polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <span>HD Art</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Fallback / Empty State if no track detected -->
+            <div class="empty-state glass-panel" id="emptyState" style="display: flex;">
+                <div class="empty-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M9 18V5l12-2v13"/>
+                        <circle cx="6" cy="18" r="3"/>
+                        <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                </div>
+                <h3>Play a track on SoundCloud</h3>
+                <p>…or paste a track link below</p>
+            </div>
+
+            <!-- Manual Input Section -->
+            <section class="input-card glass-panel">
+                <div class="input-label">Track link</div>
+                <div class="input-wrapper">
+                    <input type="text" id="manualUrlInput" class="text-input" placeholder="https://soundcloud.com/artist/track" autocomplete="off" spellcheck="false">
+                    <button class="btn-paste" id="pasteBtn" title="Paste from clipboard">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                        </svg>
+                    </button>
+                    <button class="btn btn-fetch" id="fetchTrackBtn">Find</button>
+                </div>
+            </section>
+
+            <!-- Features Pills -->
+            <div class="features-pills">
+                <div class="pill">
+                    <span class="pill-dot"></span>
+                    <span>Auto tags</span>
+                </div>
+                <div class="pill">
+                    <span class="pill-dot"></span>
+                    <span>HD cover art</span>
+                </div>
+                <div class="pill">
+                    <span class="pill-dot"></span>
+                    <span>MP3 · M4A</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="app-footer" id="appFooter" hidden>
+            <a class="support-link" id="supportLink" href="#" target="_blank" rel="noopener">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.5-9.2C1.1 8.4 3.2 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5c3.4 0 5.5 3.4 4.1 6.8C19.5 16.4 12 21 12 21z"/></svg>
+                <span>Support the project</span>
+            </a>
+            <a class="repo-link" id="repoLink" href="#" target="_blank" rel="noopener" hidden>GitHub</a>
+        </footer>
+
+        <!-- Toast Notifications -->
+        <div class="toast" id="toast" style="display: none;">
+            <span class="toast-icon" id="toastIcon"></span>
+            <span class="toast-msg" id="toastMsg"></span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="lib/tagger.js"></script>
+    <script src="lib/api.js"></script>
+    <script src="popup.js"></script>
+    <script src="liquid-config.js"></script>
+    <script src="liquid.js"></script>
+</body>
+</html>

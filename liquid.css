@@ -1,0 +1,132 @@
+/* ═══════════════════════════════════════════════════════════════
+   Liquid Glass kit — shared visual layer
+   (loaded after the app styles; purely visual)
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+    --lq-accent: #ff2d55;
+    --lq-accent-2: #ff6b81;
+    --lq-dyn: 255, 45, 85;
+    --lq-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --lq-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --lq-edge: rgba(255, 255, 255, 0.28);
+    --lq-hi: rgba(255, 255, 255, 0.10);
+    --lq-spec: rgba(255, 255, 255, 0.10);
+}
+.lq-light {
+    --lq-edge: rgba(255, 255, 255, 0.95);
+    --lq-hi: rgba(255, 255, 255, 0.55);
+    --lq-spec: rgba(255, 255, 255, 0.55);
+}
+
+/* ── background: soft blobs without filter:blur (GPU-friendly) ── */
+.lq-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.lq-mesh i { position: absolute; border-radius: 50%; will-change: transform; display: block; }
+.lq-mesh i:nth-child(1) { width: 70vmax; height: 70vmax; top: -30vmax; left: -22vmax; background: radial-gradient(circle, rgba(255, 45, 85, .20), transparent 62%); animation: lqM1 26s ease-in-out infinite; }
+.lq-mesh i:nth-child(2) { width: 64vmax; height: 64vmax; bottom: -32vmax; right: -22vmax; background: radial-gradient(circle, rgba(94, 92, 230, .18), transparent 62%); animation: lqM2 32s ease-in-out infinite; }
+.lq-mesh i:nth-child(3) { width: 50vmax; height: 50vmax; top: 30%; left: 50%; background: radial-gradient(circle, rgba(255, 149, 0, .12), transparent 62%); animation: lqM3 28s ease-in-out infinite; }
+.lq-mesh i:nth-child(4) { width: 44vmax; height: 44vmax; top: 5%; left: 15%; background: radial-gradient(circle, rgba(191, 90, 242, .12), transparent 62%); animation: lqM4 22s ease-in-out infinite; }
+.lq-mesh b { position: absolute; inset: -50%; opacity: .05; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+@keyframes lqM1 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 25% { transform: translate3d(12vw,8vh,0) scale(1.12); } 50% { transform: translate3d(5vw,15vh,0) scale(.92); } 75% { transform: translate3d(-5vw,5vh,0) scale(1.08); } }
+@keyframes lqM2 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 25% { transform: translate3d(-8vw,-6vh,0) scale(1.1); } 50% { transform: translate3d(-12vw,-12vh,0) scale(.95); } 75% { transform: translate3d(-4vw,-8vh,0) scale(1.05); } }
+@keyframes lqM3 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 33% { transform: translate3d(-12vw,6vh,0) scale(1.18); } 66% { transform: translate3d(6vw,-9vh,0) scale(.86); } }
+@keyframes lqM4 { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(9vw,13vh,0) scale(1.25); } }
+.lq-particles { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.lq-glow { position: fixed; left: 0; top: 0; width: 760px; height: 760px; margin: -380px 0 0 -380px; border-radius: 50%; z-index: 0; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(var(--lq-dyn), .10), transparent); opacity: 0; transition: opacity .6s; will-change: transform; }
+.lq-glow.on { opacity: 1; }
+
+/* ── glass ── */
+.lq-glass {
+    background-image: linear-gradient(180deg, var(--lq-hi), rgba(255, 255, 255, 0) 40%) !important;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, .18),
+        inset 0 1px 0 var(--lq-edge),
+        inset 0 -1px 0 rgba(255, 255, 255, .05),
+        inset 1px 0 0 rgba(255, 255, 255, .04),
+        inset -1px 0 0 rgba(255, 255, 255, .04) !important;
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+}
+.lq-chip {
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, .14), rgba(255, 255, 255, .02)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 4px 14px rgba(0, 0, 0, .10) !important;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    transition: transform .6s var(--lq-ease), box-shadow .5s ease, border-color .5s ease, background-color .5s ease, color .4s ease !important;
+}
+.lq-chip:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .32), 0 10px 26px rgba(var(--lq-dyn), .22) !important; }
+.lq-chip:active { transform: scale(.96); transition-duration: .12s !important; }
+
+/* specular highlight — separate layer so app ::before/::after stay untouched */
+.lq-spec { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; z-index: 5; opacity: 0;
+    background: radial-gradient(460px circle at var(--gx, 50%) var(--gy, -40%), var(--lq-spec), transparent 45%);
+    transition: opacity .8s var(--lq-ease); }
+.lq-has-spec:hover > .lq-spec { opacity: 1; }
+
+/* background refraction (Chromium) */
+@supports (backdrop-filter: url(#lq-liquid)) {
+    .lq-liquid { backdrop-filter: url(#lq-liquid) blur(20px) saturate(190%) !important; }
+}
+
+/* ── click ripple ── */
+.lq-ripple { position: absolute; border-radius: 50%; pointer-events: none; background: currentColor; opacity: .25; transform: scale(0);
+    animation: lqRipple .7s var(--lq-ease) forwards; z-index: 6; }
+@keyframes lqRipple { to { transform: scale(1); opacity: 0; } }
+
+/* ── title letters ── */
+.lq-char { display: inline-block; transform-origin: 50% 100%; animation: lqCharIn .9s cubic-bezier(.16, 1, .3, 1) backwards;
+    animation-delay: calc(var(--cd, 0) * 1ms); transition: transform .4s var(--lq-spring); }
+.lq-char.sp { width: .28em; }
+/* letters inherit the title font (so ".x span {…}" app rules do not affect them) */
+.lq-split .lq-char { font-size: inherit !important; font-weight: inherit !important; font-family: inherit !important;
+    letter-spacing: inherit !important; text-transform: inherit !important; line-height: inherit !important; color: inherit; margin: 0; padding: 0; }
+.lq-split:hover .lq-char:hover { transform: translateY(-.1em) scale(1.08); }
+@keyframes lqCharIn { from { opacity: 0; transform: translateY(.6em) rotateX(-80deg) scale(.9); filter: blur(6px); } }
+.lq-wave { position: relative; display: inline-block; background: none !important; -webkit-text-fill-color: currentColor !important; color: var(--lq-accent); }
+.lq-wave .lq-char {
+    background: none !important; -webkit-text-fill-color: currentColor !important; color: var(--lq-accent);
+    animation: lqCharIn .9s cubic-bezier(.16, 1, .3, 1) backwards, lqColorWave 6s ease-in-out infinite, lqFloat 3.6s ease-in-out infinite;
+    animation-delay: calc(var(--cd, 0) * 1ms), calc(var(--ci, 0) * .16s - 8s), calc(var(--cd, 0) * 1ms + 900ms + var(--ci, 0) * .11s);
+}
+.lq-wave::before { content: ''; position: absolute; inset: 10% -6% 0; z-index: -1; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(255, 45, 85, .22), transparent); filter: blur(18px); animation: lqAura 5s ease-in-out 1.4s infinite; }
+@keyframes lqColorWave {
+    0%, 100% { color: #ff2d55; text-shadow: 0 .12em .6em rgba(255, 45, 85, .28); }
+    30% { color: #ff5c78; text-shadow: 0 .12em .6em rgba(255, 92, 120, .28); }
+    55% { color: #ff8466; text-shadow: 0 .12em .6em rgba(255, 132, 102, .30); }
+    80% { color: #e0457f; text-shadow: 0 .12em .6em rgba(224, 69, 127, .28); }
+}
+@keyframes lqFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.045em); } }
+@keyframes lqAura { 0%, 100% { opacity: .55; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.06); } }
+.lq-brand-wave { color: var(--lq-accent) !important; -webkit-text-fill-color: currentColor !important; background: none !important;
+    animation: lqColorWave 7s ease-in-out 1.4s infinite !important; }
+
+/* ── logo ── */
+.lq-logo { position: relative; transform-origin: 50% 80%; animation: lqDrop 1.3s var(--lq-ease) backwards; overflow: hidden; }
+.lq-logo-wrap { position: relative; display: inline-flex; animation: lqLogoFloat 5s ease-in-out 1.4s infinite; }
+.lq-logo-wrap::before { content: ''; position: absolute; inset: -4px; border-radius: 14px; z-index: -1; pointer-events: none;
+    background: radial-gradient(closest-side, rgba(var(--lq-dyn), .55), transparent); filter: blur(6px); animation: lqLogoAura 3.6s ease-in-out 1.4s infinite; }
+.lq-sheen { position: absolute; inset: -40%; pointer-events: none; z-index: 3; transform: translateX(-120%);
+    background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .8) 50%, transparent 62%); }
+.lq-sheen.auto { animation: lqSheen 6s cubic-bezier(.65, 0, .35, 1) 1.6s infinite; }
+@keyframes lqDrop {
+    0% { opacity: 0; transform: translateY(-26px) rotate(-25deg) scale(.5); }
+    45% { opacity: 1; transform: translateY(3px) rotate(8deg) scale(1.08, .92); }
+    65% { transform: translateY(-2px) rotate(-4deg) scale(.97, 1.03); }
+    82% { transform: translateY(0) rotate(2deg) scale(1.01, .99); }
+}
+@keyframes lqLogoFloat { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-2px) rotate(-3deg); } }
+@keyframes lqLogoAura { 0%, 100% { transform: scale(.9); opacity: .35; } 50% { transform: scale(1.25); opacity: .75; } }
+@keyframes lqSheen { 0%, 55% { transform: translateX(-120%); } 80%, 100% { transform: translateX(120%); } }
+
+/* ── reveal on scroll ── */
+.lq-sr { opacity: 0; transform: translateY(26px) scale(.98); filter: blur(6px);
+    transition: opacity .9s var(--lq-ease), transform .9s var(--lq-ease), filter .9s ease; }
+.lq-sr.in { opacity: 1; transform: none; filter: none; }
+
+/* ── cards that tilt toward the cursor ── */
+.lq-tilt { transition: transform .7s var(--lq-ease), box-shadow .6s ease !important; transform-style: preserve-3d; }
+
+@media (prefers-reduced-motion: reduce) {
+    .lq-mesh i, .lq-char, .lq-wave .lq-char, .lq-logo, .lq-logo-wrap, .lq-sheen.auto { animation: none !important; }
+    .lq-sr { opacity: 1; transform: none; filter: none; }
+}

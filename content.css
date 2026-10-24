@@ -1,0 +1,226 @@
+/**
+ * SoundCloud Pro Downloader — Injected UI Styles
+ */
+
+/* Player Bar Download Button */
+.sc-pro-player-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    margin: 0 4px !important;
+    background: rgba(255, 45, 85, 0.12) !important;
+    border: 1px solid rgba(255, 45, 85, 0.3) !important;
+    border-radius: 50% !important;
+    color: #ff3b69 !important;
+    cursor: pointer !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    position: relative !important;
+    vertical-align: middle !important;
+}
+
+.sc-pro-player-btn:hover {
+    background: linear-gradient(135deg, #ff5500, #ff2d55) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 14px rgba(255, 45, 85, 0.5) !important;
+    transform: scale(1.08) !important;
+}
+
+.sc-pro-player-btn:active {
+    transform: scale(0.95) !important;
+}
+
+/* Sound Actions Row Button (In feeds, tracks, playlists) */
+.sc-pro-action-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    padding: 2px 9px !important;
+    height: 24px !important;
+    background: rgba(255, 85, 0, 0.1) !important;
+    border: 1px solid rgba(255, 85, 0, 0.3) !important;
+    color: #ff5500 !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    margin-right: 4px !important;
+    transition: all 0.2s ease !important;
+    font-family: inherit !important;
+}
+
+.sc-pro-action-btn:hover {
+    background: linear-gradient(135deg, #ff5500, #ff2d55) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: 0 2px 10px rgba(255, 45, 85, 0.35) !important;
+}
+
+/* In-Page Floating HUD Notification */
+.sc-pro-hud {
+    position: fixed !important;
+    bottom: 60px !important;
+    right: 20px !important;
+    z-index: 9999999 !important;
+    width: 320px !important;
+    background: rgba(14, 16, 26, 0.92) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6) !important;
+    padding: 12px 14px !important;
+    color: #ffffff !important;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif !important;
+    animation: scProSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes scProSlideIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sc-pro-hud-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.sc-pro-hud-art {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 10px !important;
+    object-fit: cover !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    flex-shrink: 0 !important;
+}
+
+.sc-pro-hud-meta {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.sc-pro-hud-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 0 2px 0 !important;
+}
+
+.sc-pro-hud-artist {
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: #9aa0b4 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    margin: 0 !important;
+}
+
+.sc-pro-hud-bar {
+    width: 100% !important;
+    height: 4px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 999px !important;
+    margin-top: 10px !important;
+    overflow: hidden !important;
+}
+
+.sc-pro-hud-fill {
+    width: 0% !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, #ff5500, #ff2d55, #af52de) !important;
+    border-radius: 999px !important;
+    transition: width 0.2s ease !important;
+}
+
+.sc-pro-hud-status {
+    display: flex !important;
+    justify-content: space-between !important;
+    font-size: 10px !important;
+    font-weight: 600 !important;
+    color: #9aa0b4 !important;
+    margin-top: 6px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   v2 — Liquid Glass layer (in-page buttons and HUD)
+   ═══════════════════════════════════════════════════════════════ */
+.sc-pro-player-btn {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .04)), rgba(255, 45, 85, .14) !important;
+    border: 1px solid rgba(255, 45, 85, .35) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 4px 14px rgba(255, 45, 85, .18) !important;
+    backdrop-filter: blur(14px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(180%) !important;
+    color: #ff2d55 !important;
+    transition: transform .6s cubic-bezier(.34, 1.56, .64, 1), box-shadow .5s ease, background .5s ease, color .4s ease !important;
+    animation: scProPop .9s cubic-bezier(.34, 1.56, .64, 1) backwards !important;
+}
+.sc-pro-player-btn:hover {
+    background: linear-gradient(135deg, #ff5a3c, #ff2d55 55%, #e0457f) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .4), 0 8px 22px rgba(255, 45, 85, .5) !important;
+    transform: translateY(-1px) scale(1.12) !important;
+}
+.sc-pro-player-btn svg { transition: transform .6s cubic-bezier(.34, 1.56, .64, 1) !important; }
+.sc-pro-player-btn:hover svg { transform: translateY(1.5px) !important; }
+.sc-pro-player-btn:active { transform: scale(.92) !important; transition-duration: .12s !important; }
+@keyframes scProPop { from { opacity: 0; transform: scale(.4) rotate(-30deg); } }
+
+.sc-pro-action-btn {
+    border-radius: 999px !important;
+    padding: 2px 11px !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .1)), rgba(255, 45, 85, .08) !important;
+    border: 1px solid rgba(255, 45, 85, .32) !important;
+    color: #ff2d55 !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 2px 8px rgba(255, 45, 85, .10) !important;
+    transition: transform .55s cubic-bezier(.22, 1, .36, 1), box-shadow .5s ease, background .5s ease, color .4s ease !important;
+    animation: scProFade .7s cubic-bezier(.22, 1, .36, 1) backwards !important;
+}
+.sc-pro-action-btn:hover {
+    background: linear-gradient(135deg, #ff5a3c, #ff2d55 55%, #e0457f) !important;
+    color: #fff !important;
+    border-color: transparent !important;
+    transform: translateY(-1px) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35), 0 6px 18px rgba(255, 45, 85, .38) !important;
+}
+.sc-pro-action-btn:active { transform: scale(.95) !important; transition-duration: .12s !important; }
+@keyframes scProFade { from { opacity: 0; transform: translateY(4px) scale(.94); } }
+
+.sc-pro-hud {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0) 40%), rgba(22, 22, 26, .72) !important;
+    backdrop-filter: blur(30px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, .12) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .55), inset 0 1px 0 rgba(255, 255, 255, .22) !important;
+    font-family: "Inter", -apple-system, "Segoe UI", sans-serif !important;
+    animation: scProHudIn .8s cubic-bezier(.34, 1.56, .64, 1) !important;
+}
+@keyframes scProHudIn {
+    0% { opacity: 0; transform: translateY(26px) scale(.9); filter: blur(8px); }
+    60% { opacity: 1; filter: blur(0); }
+    100% { opacity: 1; transform: none; }
+}
+.sc-pro-hud-art { border-radius: 12px !important; box-shadow: 0 6px 18px rgba(0, 0, 0, .45) !important; animation: scProArt 4s ease-in-out infinite !important; }
+@keyframes scProArt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-3deg) scale(1.03); } }
+.sc-pro-hud-bar { height: 5px !important; background: rgba(255, 255, 255, .08) !important; }
+.sc-pro-hud-fill {
+    position: relative !important; overflow: hidden !important;
+    background: linear-gradient(90deg, #ff5a3c, #ff2d55, #e0457f) !important;
+    box-shadow: 0 0 12px rgba(255, 45, 85, .6) !important;
+    transition: width .5s cubic-bezier(.22, 1, .36, 1) !important;
+}
+.sc-pro-hud-fill::after {
+    content: '' !important; position: absolute !important; inset: 0 !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent) !important;
+    animation: scProShimmer 1.5s ease-in-out infinite !important;
+}
+@keyframes scProShimmer { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+@media (prefers-reduced-motion: reduce) {
+    .sc-pro-player-btn, .sc-pro-action-btn, .sc-pro-hud, .sc-pro-hud-art, .sc-pro-hud-fill::after { animation: none !important; }
+}
