@@ -4,5 +4,5 @@
  */
 window.APP_CONFIG = {
     donateUrl: '',
-    repoUrl: ''
+    repoUrl: 'https://github.com/mooooo111/sc-pro-downloader'
 };
